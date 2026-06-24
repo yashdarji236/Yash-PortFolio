@@ -1,0 +1,139 @@
+/* ==========================================================================
+   APP CONTAINER & CORE LAYOUT SETUP
+   ========================================================================== */
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--cream);
+  color: var(--black);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fluid spacing container following design patterns */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.section-spacer {
+  padding-block: var(--section-pad);
+}
+
+/* ==========================================================================
+   INTERACTIVE STATES & MICRO-ANIMATIONS
+   ========================================================================== */
+/* Interactive components following active scale compressions */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(26, 26, 26, 0.06);
+}
+
+.hover-lift:active {
+  transform: scale(0.98);
+}
+
+/* Animated links underline layout matching design systems */
+.link-underlined {
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.link-underlined::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.link-underlined:hover::after {
+  width: 100%;
+}
+
+/* ==========================================================================
+   GENERIC CARDS & UTILITY WRAPPERS
+   ========================================================================== */
+.content-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card);
+  padding: clamp(20px, 4vw, 36px);
+  overflow: hidden;
+}
+
+.content-card.dark {
+  background-color: var(--black);
+  color: var(--white);
+  border-color: transparent;
+}
+
+/* Flexbox alignments utilities matching service/projects standards */
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grid layout patterns matching portfolio components */
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 24px;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT WORK
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .auto-grid {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    min-height: 100svh;
+  }
+  
+  .section-spacer {
+    padding-block: var(--section-pad);
+  }
+  
+  .auto-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .flex-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-card {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+}
