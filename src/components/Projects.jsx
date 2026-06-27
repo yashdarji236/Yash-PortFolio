@@ -6,7 +6,8 @@ export default function Projects() {
       desc: 'Personal finance tracker & budgeting SaaS',
       categories: ['Finance', 'SaaS'],
       tech: ['React', 'Node.js', 'Stripe', 'PostgreSQL'],
-      bg: '#1A1A1A',
+      bg: '#E6FF2B',
+      theme: 'light',
       sizeClass: 'card-large',
     },
     {
@@ -15,7 +16,8 @@ export default function Projects() {
       desc: 'Real-time developer collaboration platform',
       categories: ['Productivity', 'Real-time'],
       tech: ['Next.js', 'Prisma', 'WebSockets'],
-      bg: '#1B4332',
+      bg: '#0B4650',
+      theme: 'dark',
       sizeClass: 'card-small',
     },
     {
@@ -24,7 +26,8 @@ export default function Projects() {
       desc: 'Interactive data visualisation dashboard',
       categories: ['Analytics', 'Dashboard'],
       tech: ['D3.js', 'React', 'REST API'],
-      bg: '#1B4332',
+      bg: '#F9F7F2',
+      theme: 'light',
       sizeClass: 'card-small',
     },
     {
@@ -33,25 +36,33 @@ export default function Projects() {
       desc: 'Headless e-commerce engine with live CMS',
       categories: ['E-commerce', 'Headless'],
       tech: ['Next.js', 'Shopify API', 'TypeScript'],
-      bg: '#1A1A1A',
+      bg: '#898A8D',
+      theme: 'light',
       sizeClass: 'card-large',
     },
   ];
 
   return (
     <section id="work" className="projects-section">
-      <span className="eyebrow">SELECTED WORK</span>
-      <div style={{ overflow: 'hidden', marginBottom: 48 }}>
-        <h2 className="display-text" style={{ fontSize: 'var(--h1)' }}>
-          PROJECTS.
-        </h2>
+      {/* Sticky header for the notch triangle */}
+      <div className="projects-sticky-header">
+        <div className="projects-header-triangle"></div>
+      </div>
+
+      <div className="projects-intro">
+        <span className="eyebrow">SELECTED WORK</span>
+        <div style={{ overflow: 'hidden', marginBottom: 48 }}>
+          <h2 className="display-text" style={{ fontSize: 'var(--h1)' }}>
+            PROJECTS.
+          </h2>
+        </div>
       </div>
 
       <div className="projects-grid">
-        {projectsData.map((project) => (
+        {projectsData.map((project, idx) => (
           <article
             key={project.num}
-            className={`project-card ${project.sizeClass} hoverable`}
+            className={`project-card ${project.sizeClass} hoverable theme-${project.theme}`}
             style={{
               background: project.bg,
               display: 'flex',
@@ -59,6 +70,19 @@ export default function Projects() {
               justifyContent: 'space-between',
             }}
           >
+            {/* Structural elements for the notch borders */}
+            {idx > 0 && (
+              <>
+                <div className="card-border-left"></div>
+                <div className="card-border-right"></div>
+                <div className="card-border-notch-wrapper">
+                  <svg className="card-border-notch-svg" viewBox="0 0 100 30" preserveAspectRatio="none">
+                    <path d="M 0 0 L 50 30 L 100 0" fill="none" stroke="white" strokeWidth="2" />
+                  </svg>
+                </div>
+              </>
+            )}
+
             <div className="project-card-top">
               <span className="project-number">{project.num}</span>
               <div className="project-pill-group project-pill-group-top">

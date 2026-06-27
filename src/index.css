@@ -216,10 +216,14 @@ a.hero-cta-pill:active,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background 0.4s, border-color 0.4s;
+  transition: background 0.4s, border-color 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   border-bottom: 1px solid transparent;
   background: transparent;
   color: var(--black);
+}
+
+.navbar.nav-hidden {
+  transform: translateY(-100%);
 }
 
 .navbar.scrolled {
@@ -1646,4 +1650,182 @@ nav {
     width: 26px !important;
     height: 26px !important;
   }
+}
+
+/* ── PROJECTS STACKING SCROLL ANIMATION (GLOBAL & RESPONSIVE) ── */
+.projects-section {
+  position: relative;
+  padding: 0 !important;
+  background: var(--cream) !important;
+}
+
+.projects-sticky-header {
+  display: block;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  z-index: 100;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.projects-header-triangle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 30px;
+  background: var(--black);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.projects-intro {
+  padding: var(--section-pad) var(--gutter) 48px;
+  background: var(--cream);
+}
+
+.projects-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+}
+
+.project-card {
+  position: sticky;
+  top: 0;
+  width: 100% !important;
+  height: 100vh;
+  height: 100svh;
+  /* small viewport height for mobile browser address bars */
+  grid-column: auto !important;
+  aspect-ratio: auto !important;
+  border-radius: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 100px var(--gutter) 60px !important;
+  box-sizing: border-box;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Clip path notch details */
+.project-card:not(:first-child) {
+  clip-path: polygon(0 0, calc(50% - 50px) 0, 50% 30px, calc(50% + 50px) 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Borders along notch */
+.project-card:not(:first-child) .card-border-left {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(50% - 50px);
+  height: 2px;
+  background: var(--white);
+}
+
+.project-card:not(:first-child) .card-border-right {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(50% - 50px);
+  height: 2px;
+  background: var(--white);
+}
+
+.project-card:not(:first-child) .card-border-notch-wrapper {
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 102px;
+  height: 31px;
+  pointer-events: none;
+}
+
+.project-card:not(:first-child) .card-border-notch-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Responsive adjustments for mobile/tablet screens */
+@media (max-width: 768px) {
+  .projects-intro {
+    padding: 60px 20px 24px !important;
+  }
+
+  .project-card {
+    padding: 60px 20px 40px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    padding: 50px 16px 24px !important;
+  }
+
+  .project-card-top {
+    margin-bottom: 8px !important;
+    gap: 8px !important;
+  }
+
+  .project-desc {
+    margin-bottom: 12px !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  .project-title {
+    margin-bottom: 6px !important;
+  }
+}
+
+/* Project Card Light Theme Contrast Styling */
+.project-card.theme-light {
+  color: var(--black);
+}
+
+.project-card.theme-light .project-number {
+  color: rgba(0, 0, 0, 0.45) !important;
+}
+
+.project-card.theme-light .project-title {
+  color: var(--black) !important;
+}
+
+.project-card.theme-light .project-bullet {
+  background: var(--black) !important;
+}
+
+.project-card.theme-light .project-desc {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.project-card.theme-light .pill-outline {
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Light Theme Notch Borders and SVG path overrides */
+.project-card.theme-light:not(:first-child) .card-border-left,
+.project-card.theme-light:not(:first-child) .card-border-right {
+  background: var(--black) !important;
+}
+
+.project-card.theme-light:not(:first-child) .card-border-notch-svg path {
+  stroke: var(--black) !important;
+}
+
+/* Hover dynamic button style change for light theme */
+.project-card.theme-light:hover .project-view-btn {
+  background: var(--black) !important;
+  color: var(--white) !important;
+  border-color: var(--black) !important;
 }

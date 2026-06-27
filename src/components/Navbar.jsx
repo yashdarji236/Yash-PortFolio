@@ -3,10 +3,30 @@ import { useRef, useState, useEffect } from 'react';
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const navRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 80);
+
+      if (currentScrollY > 80) {
+        if (currentScrollY > lastScrollY.current) {
+          // Scrolling down
+          setNavHidden(true);
+        } else {
+          // Scrolling up
+          setNavHidden(false);
+        }
+      } else {
+        setNavHidden(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -30,7 +50,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav ref={navRef} className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <nav ref={navRef} className={`navbar ${scrolled ? 'scrolled' : ''} ${navHidden ? 'nav-hidden' : ''}`}>
         <div className="nav-anim-item" style={{ overflow: 'hidden' }}>
           <a
             href="#hero"
