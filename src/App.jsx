@@ -10,10 +10,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [startHero, setStartHero] = useState(false);
 
   const handlePreloaderComplete = useCallback(() => {
     setLoading(false);
   }, []);
+
+  const handleExitStart = useCallback(() => {
+    setStartHero(true);
+  }, []);
+
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [loading]);
 
   useEffect(() => {
     if (loading) return;
@@ -36,13 +52,8 @@ export default function App() {
 
     window.lenisInstance = lenis;
 
-    // The DOM just swapped from <Preloader> to the full <Portfolio> tree,
-    // which changes every section's height. Child components (e.g. Hero)
-    // create their own ScrollTriggers in their own mount effects, and those
-    // fire BEFORE this one (React runs child effects before parent effects).
-    // So by the time we get here, triggers may have been measured against
-    // a layout that's still settling. Refresh on the next frame once
-    // everything has painted, so trigger start/end positions are accurate.
+    // The DOM has been paint-settled and the preloader is unmounted.
+    // Refresh ScrollTriggers once everything has painted to ensure accurate layout calculations.
     const raf = requestAnimationFrame(() => {
       ScrollTrigger.refresh();
     });
@@ -57,8 +68,13 @@ export default function App() {
 
   return (
     <>
-      {loading && <Preloader onComplete={handlePreloaderComplete} />}
-      {!loading && <Portfolio />}
+      <Portfolio startHero={startHero} />
+      {loading && (
+        <Preloader
+          onComplete={handlePreloaderComplete}
+          onExitStart={handleExitStart}
+        />
+      )}
     </>
   );
 }

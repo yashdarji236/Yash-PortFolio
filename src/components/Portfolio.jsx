@@ -11,14 +11,14 @@ import Contact from './Contact';
 import Footer from './Footer';
 import ErrorBoundary from './ErrorBoundary';
 
-export default function Portfolio() {
+export default function Portfolio({ startHero }) {
   return (
     <ErrorBoundary>
       <Cursor />
       <div className="page-wrapper">
         <Navbar />
         <main>
-          <Hero />
+          <Hero startAnimation={startHero} />
           <Marquee />
           <About />
           <Services />

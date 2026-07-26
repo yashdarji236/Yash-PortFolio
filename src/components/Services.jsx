@@ -43,6 +43,12 @@ export default function Services() {
       tags: ['Docker', 'CI/CD', 'Vercel'],
       desc: 'Deploy faster, scale cheaper, and ship with total confidence.',
     },
+    {
+      num: '06',
+      name: 'Web3 Development',
+      tags: ['Solidity', 'Ethers.js', 'MetaMask'],
+      desc: 'Decentralized applications, secure smart contracts, and seamless Web3 wallet integrations.',
+    },
   ];
 
   const handleRowClick = (idx) => {

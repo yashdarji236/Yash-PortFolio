@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import './Preloader.css';
 
-export default function Preloader({ onComplete }) {
+export default function Preloader({ onComplete, onExitStart }) {
   const [progress, setProgress] = useState(0);
   const [exiting, setExiting] = useState(false);
   const completedRef = useRef(false);
@@ -53,6 +53,9 @@ export default function Preloader({ onComplete }) {
 
     const exitTimer = setTimeout(() => {
       setExiting(true);
+      if (typeof onExitStart === 'function') {
+        onExitStart();
+      }
     }, 400);
 
     const completeTimer = setTimeout(() => {
@@ -63,12 +66,15 @@ export default function Preloader({ onComplete }) {
       clearTimeout(exitTimer);
       clearTimeout(completeTimer);
     };
-  }, [progress]);
+  }, [progress, onExitStart]);
 
   const handleSkip = () => {
     if (completedRef.current) return;
     setProgress(100);
     setExiting(true);
+    if (typeof onExitStart === 'function') {
+      onExitStart();
+    }
     // Trigger onComplete after a short delay matching the skip exit transition
     setTimeout(() => {
       triggerComplete();

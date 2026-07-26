@@ -5,16 +5,26 @@ import heroIcon from "../assets/hero-icon.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Hero() {
+export default function Hero({ startAnimation }) {
   const line1Ref = useRef(null);
   const line2Ref = useRef(null);
   const line3Ref = useRef(null);
   const subtitleRef = useRef(null);
   const ctaRef = useRef(null);
-  const imageRef = useRef(null);
+  const imageContainerRef = useRef(null);
   const sectionRef = useRef(null);
 
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   useEffect(() => {
+    if (!startAnimation) return;
+
     // gsap.context scopes every tween/ScrollTrigger created inside it to this
     // component, and ctx.revert() below undoes ALL of them cleanly. This is
     // what protects you from React 18 Strict Mode's double-invoke in dev
@@ -26,7 +36,7 @@ export default function Hero() {
       // Set the "from" state synchronously before paint so there's no flash
       // of fully-visible content before the timeline starts.
       gsap.set(lines, { yPercent: 110, opacity: 0, rotateX: 8 });
-      gsap.set(imageRef.current, { scale: 0.85, opacity: 0 });
+      gsap.set(imageContainerRef.current, { scale: 0.85, opacity: 0 });
       gsap.set([subtitleRef.current, ctaRef.current], { y: 24, opacity: 0 });
 
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -39,7 +49,7 @@ export default function Hero() {
         stagger: 0.15,
       })
         .to(
-          imageRef.current,
+          imageContainerRef.current,
           { scale: 1, opacity: 1, duration: 1.0 },
           "-=0.8"
         )
@@ -71,7 +81,7 @@ export default function Hero() {
       // The hero image loading after mount shifts page layout, which throws
       // off every ScrollTrigger start position calculated above. Recompute
       // them once the image is actually in the DOM at its final size.
-      const imgEl = imageRef.current;
+      const imgEl = imageContainerRef.current?.querySelector(".base-image");
       const refresh = () => ScrollTrigger.refresh();
       if (imgEl && !imgEl.complete) {
         imgEl.addEventListener("load", refresh);
@@ -85,7 +95,7 @@ export default function Hero() {
     }, sectionRef);
 
     return () => ctx.revert(); // kills timeline + all ScrollTriggers + resets inline styles
-  }, []);
+  }, [startAnimation]);
 
   const handleCtaClick = () => {
     const contactSection = document.getElementById("contact");
@@ -120,12 +130,22 @@ export default function Hero() {
         </div>
 
         <div className="hero-right">
-          <img
-            ref={imageRef}
-            src={heroIcon}
-            alt="Hero Icon"
-            className="hero-image"
-          />
+          <div
+            ref={imageContainerRef}
+            className="hero-image-container hoverable"
+            onMouseMove={handleMouseMove}
+          >
+            <img
+              src={heroIcon}
+              alt="Hero Icon"
+              className="hero-image base-image"
+            />
+            <img
+              src={heroIcon}
+              alt="Hero Icon Reveal"
+              className="hero-image reveal-image"
+            />
+          </div>
         </div>
       </div>
 
