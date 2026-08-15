@@ -1,4 +1,4 @@
-/* --- Global Reset & Variables --- */
+﻿/* --- Global Reset & Variables --- */
 * {
   margin: 0;
   padding: 0;
@@ -1851,6 +1851,32 @@ footer {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+  }
+
+  .studio-bg {
+    background-image: none !important;
+  }
+
+  .studio-banner-inner {
+    background-color: rgb(197, 174, 174) !important;
+  }
+
+  .studio-banner-inner::before,
+  .studio-banner-inner::after {
+    display: none !important;
+  }
+
+  .banner-title {
+    color: var(--color-black) !important;
+  }
+
+  .banner-desc {
+    color: rgba(0, 0, 0, 0.75) !important;
+  }
+
+  .banner-tag {
+    color: var(--color-white) !important;
+    background: var(--color-black) !important;
   }
 
   .meta-item p {
