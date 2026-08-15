@@ -1853,8 +1853,7 @@ footer {
     gap: 15px;
   }
 
-  .meta-item.align-center p,
-  .meta-item.align-right p {
+  .meta-item p {
     text-align: center;
   }
 
