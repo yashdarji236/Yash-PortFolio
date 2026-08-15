@@ -1,117 +1,108 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [navHidden, setNavHidden] = useState(false);
-  const navRef = useRef(null);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrolled(currentScrollY > 80);
-
-      if (currentScrollY > 80) {
-        if (currentScrollY > lastScrollY.current) {
-          // Scrolling down
-          setNavHidden(true);
-        } else {
-          // Scrolling up
-          setNavHidden(false);
-        }
+      if (window.scrollY > 50) {
+        setScrolled(true);
       } else {
-        setNavHidden(false);
+        setScrolled(false);
       }
-
-      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLinkClick = (id) => {
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
+  const handleLinkClick = (e, id) => {
+    e.preventDefault();
     setMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element && window.lenisInstance) {
-      window.lenisInstance.scrollTo(element);
-    } else if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+
+    const target = document.getElementById(id);
+    if (target) {
+      if (window.lenisInstance) {
+        window.lenisInstance.scrollTo(target);
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
-  const navLinks = [
-    ['work', 'Work'],
-    ['about', 'About'],
-    ['skills', 'Skills'],
-    ['contact', 'Contact'],
-  ];
-
   return (
     <>
-      <nav ref={navRef} className={`navbar ${scrolled ? 'scrolled' : ''} ${navHidden ? 'nav-hidden' : ''}`}>
-        <div className="nav-anim-item" style={{ overflow: 'hidden' }}>
-          <a
-            href="#hero"
-            className="hoverable"
-            style={{ fontSize: 20, fontWeight: 800, letterSpacing: '-0.02em' }}
-            onClick={(e) => {
-              e.preventDefault();
-              handleLinkClick('hero');
-            }}
-          >
+      {/* Navigation Header */}
+      <header id="top" className={scrolled ? 'scrolled' : ''}>
+        <div className="header-container">
+          <a href="#home" id="logo" style={{ display: 'flex', alignItems: 'center', fontSize: '24px', fontWeight: '900', letterSpacing: '-0.03em', color: 'var(--color-white)', textDecoration: 'none' }} onClick={(e) => handleLinkClick(e, 'home')}>
             YASH.
           </a>
-        </div>
 
-        <ul className="nav-links">
-          {navLinks.map(([id, label]) => (
-            <li className="nav-anim-item" key={id}>
-              <a
-                href={`#${id}`}
-                className="hoverable"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(id);
-                }}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="nav-right nav-anim-item" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <button className="nav-cta hoverable btn-active" onClick={() => handleLinkClick('contact')}>
-            HIRE ME ↗
-          </button>
-
-          <button className="nav-hamburger hoverable" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-            <span style={{ transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
-            <span style={{ opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }} />
-          </button>
-        </div>
-      </nav>
-
-      <div className={`nav-overlay ${menuOpen ? 'open' : ''}`}>
-        <button className="nav-overlay-close hoverable" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-          ×
-        </button>
-        <div className="nav-overlay-links">
-          {navLinks.map(([id, label]) => (
-            <a
-              href={`#${id}`}
-              key={id}
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick(id);
-              }}
-            >
-              {label}
+          <div className="nav-actions">
+            <a href="#contact" className="connect-btn" onClick={(e) => handleLinkClick(e, 'contact')}>
+              <span className="btn-text" data-text="Connect With Me">Connect With Me</span>
             </a>
-          ))}
+
+            <button
+              className="menu-toggle"
+              aria-label="Toggle Menu"
+              aria-expanded={menuOpen}
+              aria-controls="slide-out-menu"
+              onClick={() => setMenuOpen(true)}
+            >
+              <span className="burger-lines">
+                <span className="line line1"></span>
+                <span className="line line2"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Slide-out Navigation Drawer */}
+      <div
+        id="slide-out-menu"
+        className={menuOpen ? 'active' : ''}
+        aria-label="Off Canvas Menu"
+        aria-modal="true"
+        role="dialog"
+      >
+        <div className="menu-inner-wrap">
+          <button
+            className="menu-close"
+            aria-label="Close Menu"
+            onClick={() => setMenuOpen(false)}
+          >
+            <span className="close-lines">
+              <span className="close-line line1"></span>
+              <span className="close-line line2"></span>
+            </span>
+          </button>
+
+          <nav className="off-canvas-nav" aria-label="Drawer Menu">
+            <ul className="menu-links">
+              <li><a href="#work" onClick={(e) => handleLinkClick(e, 'work')}>Work</a></li>
+              <li><a href="#expertise" onClick={(e) => handleLinkClick(e, 'expertise')}>Expertise</a></li>
+              <li><a href="#experience" onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a></li>
+              <li><a href="#certificates" onClick={(e) => handleLinkClick(e, 'certificates')}>Certificates</a></li>
+              <li><a href="#awards" onClick={(e) => handleLinkClick(e, 'awards')}>Achievements</a></li>
+              <li><a href="#about" onClick={(e) => handleLinkClick(e, 'about')}>About</a></li>
+              <li><a href="#contact" onClick={(e) => handleLinkClick(e, 'contact')}>Connect</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
     </>

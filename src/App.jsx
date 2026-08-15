@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import './index.css';
 import Portfolio from './components/Portfolio';
 import Preloader from './components/Preloader';
 

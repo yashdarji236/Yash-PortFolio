@@ -1,90 +1,145 @@
+import { useEffect, useState } from 'react';
+
 export default function Footer() {
-  const handleLinkClick = (id) => {
-    if (id === 'top') {
-      if (window.lenisInstance) {
-        window.lenisInstance.scrollTo(0);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      return;
-    }
+  const [times, setTimes] = useState({
+    mumbai: '--:--:--',
+    tokyo: '--:--:--',
+    london: '--:--:--',
+    paris: '--:--:--',
+  });
 
-    const element = document.getElementById(id);
-    if (element && window.lenisInstance) {
-      window.lenisInstance.scrollTo(element);
-    } else if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    const timeOptions = {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    };
 
-  const navLinks = [
-    ['top', 'Home'],
-    ['work', 'Work'],
-    ['about', 'About'],
-    ['skills', 'Skills'],
-    ['contact', 'Contact'],
-  ];
+    const zones = {
+      mumbai: 'Asia/Kolkata',
+      tokyo: 'Asia/Tokyo',
+      london: 'Europe/London',
+      paris: 'Europe/Paris',
+    };
+
+    const updateTimes = () => {
+      const now = new Date();
+      const newTimes = {};
+      Object.keys(zones).forEach((key) => {
+        try {
+          const formatter = new Intl.DateTimeFormat('en-US', {
+            ...timeOptions,
+            timeZone: zones[key],
+          });
+          newTimes[key] = formatter.format(now);
+        } catch (err) {
+          newTimes[key] = '--:--:--';
+        }
+      });
+      setTimes(newTimes);
+    };
+
+    updateTimes();
+    const interval = setInterval(updateTimes, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <footer className="footer-section">
-      <div className="footer-grid">
-        <div>
-          <button
-            className="hoverable"
-            style={{
-              fontSize: 20,
-              fontWeight: 800,
-              letterSpacing: '-0.02em',
-              marginBottom: 12,
-              cursor: 'pointer',
-              display: 'inline-block',
-            }}
-            onClick={() => handleLinkClick('top')}
-          >
-            YASH.
-          </button>
-          <p style={{ fontSize: 14, color: 'rgba(255, 255, 255, 0.6)', marginTop: 12 }}>
-            Senior Full-Stack Engineer
-          </p>
-          <p style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.4)', marginTop: 32 }}>
-            © 2025 Yash. All rights reserved.
-          </p>
+    <footer id="contact">
+      <div className="footer-inner-container">
+
+        {/* Dividers & Contact Details */}
+        <div className="footer-divider"></div>
+
+        <div className="footer-contact-row">
+          <div className="footer-col-left">
+            <h3 className="contact-label">New Business Inquiries</h3>
+          </div>
+          <div className="footer-col-mid">
+            <span className="meta-label">Email</span>
+          </div>
+          <div className="footer-col-right">
+            <span className="meta-value">
+              <a href="mailto:yashdarji5237@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>
+                yashdarji5237@gmail.com
+              </a>
+            </span>
+          </div>
         </div>
 
-        <div>
-          <div className="footer-col-label">S:</div>
-          <a href="https://github.com/yash" target="_blank" rel="noopener noreferrer" className="footer-link hoverable">GitHub</a>
-          <a href="https://linkedin.com/in/yash" target="_blank" rel="noopener noreferrer" className="footer-link hoverable">LinkedIn</a>
-          <a href="https://twitter.com/yash" target="_blank" rel="noopener noreferrer" className="footer-link hoverable">Twitter</a>
-          <a href="https://dribbble.com/yash" target="_blank" rel="noopener noreferrer" className="footer-link hoverable">Dribbble</a>
+        <div className="footer-divider"></div>
+
+        {/* About bio statement */}
+        <div className="footer-about-row">
+          <div className="footer-col-left">
+            <h3 className="contact-label">About</h3>
+          </div>
+          <div className="footer-col-text">
+            <p>Yash is a full-stack engineer and UI developer building innovative digital solutions through AI, Web3, and full-stack development. Focused on creating meaningful impact, he engineers robust backend architectures and designs smooth user experiences that scale.</p>
+          </div>
         </div>
 
-        <div>
-          <div className="footer-col-label">E:</div>
-          <a href="mailto:hello@yash.dev" className="footer-link hoverable">hello@yash.dev</a>
+        {/* Full width logo */}
+        <div className="footer-large-logo-row" style={{ display: 'flex', justifyContent: 'center' }}>
+          <h2 style={{ fontSize: '10vw', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)', margin: '40px 0 20px', fontFamily: "var(--font-heading)" }}>
+            YASH
+          </h2>
         </div>
 
-        <div>
-          <div className="footer-col-label">M:</div>
-          {navLinks.map(([id, label]) => (
-            <a
-              href={id === 'top' ? '#hero' : `#${id}`}
-              key={id}
-              className="footer-link hoverable"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick(id);
-              }}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
-      </div>
+        {/* Clocks row */}
+        <div className="footer-clocks-row">
+          {/* Clock 1: Mumbai */}
+          <div className="clock-item">
+            <div className="clock-header">
+              <span className="clock-dot"></span>
+              <span className="clock-city">MUMBAI</span>
+            </div>
+            <div className="clock-time">{times.mumbai}</div>
+          </div>
 
-      <div className="footer-bottom">
-        <p>Designed & developed with obsession. Mumbai, India.</p>
-        <p>Available for work ✦ 2025</p>
+          {/* Clock 2: Tokyo */}
+          <div className="clock-item">
+            <div className="clock-header">
+              <span className="clock-dot"></span>
+              <span className="clock-city">TOKYO</span>
+            </div>
+            <div className="clock-time">{times.tokyo}</div>
+          </div>
+
+          {/* Clock 3: London */}
+          <div className="clock-item">
+            <div className="clock-header">
+              <span className="clock-dot"></span>
+              <span className="clock-city">LONDON</span>
+            </div>
+            <div className="clock-time">{times.london}</div>
+          </div>
+
+          {/* Clock 4: Paris */}
+          <div className="clock-item">
+            <div className="clock-header">
+              <span className="clock-dot"></span>
+              <span className="clock-city">PARIS</span>
+            </div>
+            <div className="clock-time">{times.paris}</div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="footer-divider"></div>
+
+        {/* Meta links and Copyright */}
+        <div className="footer-metadata-row">
+          <div className="footer-meta-left">
+            <a href="https://www.linkedin.com/in/yash-darji-202447342/" target="_blank" rel="noopener noreferrer" className="linkedin-link">LinkedIn</a>
+            <a href="https://github.com/yashdarji236" target="_blank" rel="noopener noreferrer" className="linkedin-link" style={{ marginLeft: '25px' }}>GitHub</a>
+            <a href="https://x.com/yashdarji182764" target="_blank" rel="noopener noreferrer" className="linkedin-link" style={{ marginLeft: '25px' }}>Twitter</a>
+
+          </div>
+
+        </div>
+
       </div>
     </footer>
   );

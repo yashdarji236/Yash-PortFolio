@@ -1,31 +1,32 @@
-import Cursor from './Cursor';
 import Navbar from './Navbar';
 import Hero from './Hero';
-import Marquee from './Marquee';
-import About from './About';
-import Services from './Services';
 import Projects from './Projects';
-import Skills from './Skills';
-import Testimonials from './Testimonials';
-import Contact from './Contact';
+import Expertise from './Expertise';
+import Experience from './Experience';
+import Quote from './Quote';
+import Clients from './Clients';
+import Milestones from './Milestones';
+import Awards from './Awards';
+import About from './About';
 import Footer from './Footer';
 import ErrorBoundary from './ErrorBoundary';
 
 export default function Portfolio({ startHero }) {
   return (
     <ErrorBoundary>
-      <Cursor />
+      <div className="noise-overlay"></div>
       <div className="page-wrapper">
         <Navbar />
-        <main>
+        <main id="ajax-content-wrap">
           <Hero startAnimation={startHero} />
-          <Marquee />
-          <About />
-          <Services />
           <Projects />
-          <Skills />
-          <Testimonials />
-          <Contact />
+          <Expertise />
+          <Experience />
+          <Quote />
+          <Clients />
+          <Milestones />
+          <Awards />
+          <About />
         </main>
         <Footer />
       </div>
