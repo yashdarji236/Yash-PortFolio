@@ -74,8 +74,12 @@ export default function Navbar() {
           </a>
 
           <div className="nav-actions">
-            <a href="#contact" className="connect-btn" onClick={(e) => handleLinkClick(e, 'contact')}>
+            <a href="#contact" className="connect-btn connect-header-btn" onClick={(e) => handleLinkClick(e, 'contact')}>
               <span className="btn-text" data-text="Connect With Me">Connect With Me</span>
+            </a>
+
+            <a href="https://drive.google.com/file/d/1rkCooRrWwFSRjyko1Yc7YeKrkgL10pBS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="connect-btn resume-header-btn">
+              <span className="btn-text" data-text="Resume">Resume</span>
             </a>
 
             <button

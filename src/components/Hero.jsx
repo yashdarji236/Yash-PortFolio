@@ -29,7 +29,7 @@ export default function Hero({ startAnimation }) {
             </p>
           </div>
           <div className="meta-item align-center">
-            <p>Specializing in AI, Full-Stack &amp; Web3</p>
+            <p>Specializing in AI, Full-Stack</p>
           </div>
 
         </div>

@@ -140,6 +140,18 @@ header.scrolled {
   background-color: var(--color-white);
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 576px) {
+  .connect-header-btn {
+    display: none;
+  }
+}
+
 /* Hamburger menu button */
 .menu-toggle {
   background: none;
