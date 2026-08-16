@@ -150,6 +150,11 @@ header.scrolled {
   .connect-header-btn {
     display: none;
   }
+
+  .resume-header-btn {
+    padding: 8px 18px;
+    font-size: 13px;
+  }
 }
 
 /* Hamburger menu button */
@@ -2276,6 +2281,10 @@ footer {
 @media (max-width: 520px) {
   .connect-btn {
     display: none;
+  }
+
+  .connect-btn.resume-header-btn {
+    display: inline-block;
   }
 
   .about-giant-heading {
