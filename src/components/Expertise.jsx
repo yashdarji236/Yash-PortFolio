@@ -106,7 +106,7 @@ const expertiseData = [
     heading: 'Responsive, scalable, and high-performance frontend solutions',
     text: 'I design and build conversion-focused web applications that balance design fidelity with technical scalability. Specializing in modern frameworks and performance optimization, I ensure applications are blazing fast, accessible, and delight users.',
     capabilities: [
-      { name: 'React & Next.js', num: '01' },
+      { name: 'React', num: '01' },
       { name: 'TypeScript Integration', num: '02' },
       { name: 'Performance Optimization', num: '03' },
       { name: 'SEO & Web Accessibility', num: '04' }
