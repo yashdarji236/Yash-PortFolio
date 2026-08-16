@@ -2128,6 +2128,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+  #hover-image-tracker {
+    display: none !important;
+  }
+
   html {
     font-size: 14px;
   }

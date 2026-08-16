@@ -39,6 +39,7 @@ export default function Projects() {
 
   useEffect(() => {
     const handleMouseMove = (e) => {
+      if (window.innerWidth <= 768) return;
       targetX.current = e.clientX;
       targetY.current = e.clientY;
     };
@@ -64,6 +65,7 @@ export default function Projects() {
   }, []);
 
   const handleMouseEnter = (img, video) => {
+    if (window.innerWidth <= 768) return;
     isTracking.current = true;
     if (trackerRef.current) {
       trackerRef.current.classList.add('active');
