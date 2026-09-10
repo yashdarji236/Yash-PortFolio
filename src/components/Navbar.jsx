@@ -78,7 +78,7 @@ export default function Navbar() {
               <span className="btn-text" data-text="Connect With Me">Connect With Me</span>
             </a>
 
-            <a href="https://drive.google.com/file/d/1rkCooRrWwFSRjyko1Yc7YeKrkgL10pBS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="connect-btn resume-header-btn">
+            <a href="https://drive.google.com/file/d/1k9SWqMjCJ-SHxKH6p0b6J9YC1UhYCnZE/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="connect-btn resume-header-btn">
               <span className="btn-text" data-text="Resume">Resume</span>
             </a>
 
