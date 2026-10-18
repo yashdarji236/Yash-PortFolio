@@ -36,7 +36,7 @@ export default function Hero({ startAnimation }) {
                 ...(!startAnimation ? { opacity: 0, animation: 'none' } : {})
               }}
             >
-              Yash Darji
+              Yash
             </h1>
           </div>
         </div>
