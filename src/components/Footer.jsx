@@ -61,7 +61,7 @@ export default function Footer() {
           </div>
           <div className="footer-col-right">
             <span className="meta-value">
-              <a href="mailto:yashdarji5237@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <a href="mailto:yashdarji5237@gmail.com" aria-label="Email Yash Darji at yashdarji5237@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>
                 yashdarji5237@gmail.com
               </a>
             </span>
@@ -76,15 +76,19 @@ export default function Footer() {
             <h3 className="contact-label">About</h3>
           </div>
           <div className="footer-col-text">
-            <p>Yash is a full-stack engineer and UI developer building innovative digital solutions through AI, Web3, and full-stack development. Focused on creating meaningful impact, he engineers robust backend architectures and designs smooth user experiences that scale.</p>
+            <p>Yash Darji is a full stack developer and UI engineer building innovative digital solutions through AI, Web3, and full-stack development. Focused on creating meaningful impact, he engineers robust backend architectures and designs smooth user experiences that scale.</p>
           </div>
         </div>
 
         {/* Full width logo */}
         <div className="footer-large-logo-row" style={{ display: 'flex', justifyContent: 'center' }}>
-          <h2 style={{ fontSize: '10vw', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)', margin: '40px 0 20px', fontFamily: "var(--font-heading)" }}>
+          <div
+            role="img"
+            aria-label="Yash Darji Logo"
+            style={{ fontSize: '10vw', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)', margin: '40px 0 20px', fontFamily: "var(--font-heading)" }}
+          >
             YASH
-          </h2>
+          </div>
         </div>
 
         {/* Clocks row */}
@@ -132,12 +136,10 @@ export default function Footer() {
         {/* Meta links and Copyright */}
         <div className="footer-metadata-row">
           <div className="footer-meta-left">
-            <a href="https://www.linkedin.com/in/yash-darji-202447342/" target="_blank" rel="noopener noreferrer" className="linkedin-link">LinkedIn</a>
-            <a href="https://github.com/yashdarji236" target="_blank" rel="noopener noreferrer" className="linkedin-link" style={{ marginLeft: '25px' }}>GitHub</a>
-            <a href="https://x.com/yashdarji182764" target="_blank" rel="noopener noreferrer" className="linkedin-link" style={{ marginLeft: '25px' }}>Twitter</a>
-
+            <a href="https://www.linkedin.com/in/yash-darji-202447342/" target="_blank" rel="noopener noreferrer" className="linkedin-link" aria-label="Yash Darji LinkedIn Profile">LinkedIn</a>
+            <a href="https://github.com/yashdarji236" target="_blank" rel="noopener noreferrer" className="linkedin-link" style={{ marginLeft: '25px' }} aria-label="Yash Darji GitHub Profile">GitHub</a>
+            <a href="https://x.com/yashdarji182764" target="_blank" rel="noopener noreferrer" className="linkedin-link" style={{ marginLeft: '25px' }} aria-label="Yash Darji Twitter Profile">Twitter</a>
           </div>
-
         </div>
 
       </div>

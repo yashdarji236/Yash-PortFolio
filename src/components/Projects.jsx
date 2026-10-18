@@ -171,11 +171,17 @@ export default function Projects() {
               onMouseEnter={() => handleMouseEnter(project.img, project.video)}
               onMouseLeave={handleMouseLeave}
             >
-              <a href={project.url} target="_blank" className="portfolio-item-link" rel="noopener noreferrer">
+              <a
+                href={project.url}
+                target="_blank"
+                className="portfolio-item-link"
+                rel="noopener noreferrer"
+                aria-label={`View live project: ${project.title}`}
+              >
                 <div className="portfolio-item-inner">
                   <span className="portfolio-number">{project.num}</span>
-                  <h2 className="portfolio-title">{project.title}</h2>
-                  <svg className="portfolio-arrow" viewBox="60 58 140 140" xmlns="http://www.w3.org/2000/svg">
+                  <h3 className="portfolio-title">{project.title}</h3>
+                  <svg className="portfolio-arrow" viewBox="60 58 140 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path>
                   </svg>
                 </div>
@@ -186,9 +192,9 @@ export default function Projects() {
       </div>
 
       {/* Hover Cursor Image Container */}
-      <div id="hover-image-tracker" ref={trackerRef}>
+      <div id="hover-image-tracker" ref={trackerRef} aria-hidden="true">
         <div className="tracker-media-wrap">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" className="tracker-img" ref={trackerImgRef} style={{ display: 'none' }} />
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Project preview" className="tracker-img" ref={trackerImgRef} style={{ display: 'none' }} />
           <video className="tracker-video" loop muted playsInline autoPlay ref={trackerVideoRef}></video>
         </div>
       </div>

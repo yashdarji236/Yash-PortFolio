@@ -68,7 +68,7 @@ function ExpertiseBlock({
         ></div>
         <div className="expertise-hero-content">
           <span className="exp-num">{num}</span>
-          <h2 className="exp-title">{title}</h2>
+          <h3 className="exp-title">{title}</h3>
         </div>
       </div>
       <div className="expertise-details">
@@ -77,7 +77,7 @@ function ExpertiseBlock({
             <span className="giant-num">{giantNum}</span>
           </div>
           <div className="details-right">
-            <h3 className="details-heading">{heading}</h3>
+            <h4 className="details-heading">{heading}</h4>
             <p className="details-text">{text}</p>
 
             <div className="capabilities-list">

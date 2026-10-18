@@ -69,16 +69,33 @@ export default function Navbar() {
       {/* Navigation Header */}
       <header id="top" className={scrolled ? 'scrolled' : ''}>
         <div className="header-container">
-          <a href="#home" id="logo" style={{ display: 'flex', alignItems: 'center', fontSize: '24px', fontWeight: '900', letterSpacing: '-0.03em', color: 'var(--color-white)', textDecoration: 'none' }} onClick={(e) => handleLinkClick(e, 'home')}>
+          <a
+            href="#home"
+            id="logo"
+            aria-label="Yash Darji Home"
+            style={{ display: 'flex', alignItems: 'center', fontSize: '24px', fontWeight: '900', letterSpacing: '-0.03em', color: 'var(--color-white)', textDecoration: 'none' }}
+            onClick={(e) => handleLinkClick(e, 'home')}
+          >
             YASH.
           </a>
 
           <div className="nav-actions">
-            <a href="#contact" className="connect-btn connect-header-btn" onClick={(e) => handleLinkClick(e, 'contact')}>
+            <a
+              href="#contact"
+              className="connect-btn connect-header-btn"
+              aria-label="Connect With Yash Darji"
+              onClick={(e) => handleLinkClick(e, 'contact')}
+            >
               <span className="btn-text" data-text="Connect With Me">Connect With Me</span>
             </a>
 
-            <a href="https://drive.google.com/file/d/1k9SWqMjCJ-SHxKH6p0b6J9YC1UhYCnZE/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="connect-btn resume-header-btn">
+            <a
+              href="https://drive.google.com/file/d/1k9SWqMjCJ-SHxKH6p0b6J9YC1UhYCnZE/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="connect-btn resume-header-btn"
+              aria-label="View Yash Darji's Resume"
+            >
               <span className="btn-text" data-text="Resume">Resume</span>
             </a>
 
@@ -153,17 +170,17 @@ export default function Navbar() {
               <span className="info-heading">Socials</span>
               <ul className="info-social-links">
                 <li>
-                  <a href="https://www.linkedin.com/in/yash-darji-202447342/" target="_blank" rel="noopener noreferrer" className="social-link-item">
+                  <a href="https://www.linkedin.com/in/yash-darji-202447342/" target="_blank" rel="noopener noreferrer" className="social-link-item" aria-label="Yash Darji LinkedIn Profile">
                     LinkedIn
                   </a>
                 </li>
                 <li>
-                  <a href="https://github.com/yashdarji236" target="_blank" rel="noopener noreferrer" className="social-link-item">
+                  <a href="https://github.com/yashdarji236" target="_blank" rel="noopener noreferrer" className="social-link-item" aria-label="Yash Darji GitHub Profile">
                     GitHub
                   </a>
                 </li>
                 <li>
-                  <a href="https://x.com/yashdarji182764" target="_blank" rel="noopener noreferrer" className="social-link-item">
+                  <a href="https://x.com/yashdarji182764" target="_blank" rel="noopener noreferrer" className="social-link-item" aria-label="Yash Darji Twitter Profile">
                     Twitter / X
                   </a>
                 </li>
