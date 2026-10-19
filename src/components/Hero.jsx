@@ -24,7 +24,7 @@ export default function Hero({ startAnimation }) {
               className="split-line text-subtitle"
               style={!startAnimation ? { opacity: 0, animation: 'none' } : undefined}
             >
-              Full Stack Developer | AI, Web3 &amp; Web Apps
+              AI Full Stack Engineer
             </span>
           </div>
           <div className="split-line-wrapper">
