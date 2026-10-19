@@ -18,6 +18,14 @@ const certificates = [
     description: 'Verified Kaggle credential demonstrating proficiency in writing optimized Python code, algorithm design, and core software structures.'
   },
   {
+    title: 'Bharatiya Antariksh Hackathon 2026',
+    issuer: 'ISRO',
+    date: 'Issued 2026',
+    credentialUrl: 'https://drive.google.com/file/d/1qTDBSZ7yVdwz2Xmj3R6cRmO0p_FzvAr1/view?usp=drive_link',
+    skills: ['Space Tech', 'AI', 'Full-Stack', 'Prototyping'],
+    description: 'Participating in the Bharatiya Antariksh Hackathon 2026, working on a technology driven solution to address a real world challenge in the space sector. Collaborating with a team to research the problem, design the solution, develop the prototype, and apply full-stack and AI technologies to build a practical and scalable solution.'
+  },
+  {
     title: 'TCS iON Career Edge – Young Professional',
     issuer: 'Tata Consultancy Services',
     date: 'Issued Jan 2025',
